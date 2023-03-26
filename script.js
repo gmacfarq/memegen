@@ -1,23 +1,24 @@
 "use strict";
 
-function generate(event) {
+function createMeme(event) {
   event.preventDefault();
 
-  let form = document.querySelector("form");
-  let img = form.querySelector("input[name=image]").value;
-  let topText = form.querySelector("input[name=top]").value;
-  let bottomText = form.querySelector("input[name=bottom]").value;
+  let form = document.getElementById("memeForm");
+  let imgURL = document.getElementById("image").value;
+  let topText = document.getElementById("top").value;
+  let bottomText = document.getElementById("bottom").value;
 
-  let memesWrap = document.querySelector(".memeWrap");
+  let memesWrapper = document.getElementById("memes-wrapper");
   let newMeme = document.createElement("div");
-  newMeme.innerHTML = `<h2 class="text" id="top-text"> ${topText} </h2>
-                    <img src="${img}"/>
-                    <h2 class="text" id="bottom-text"> ${bottomText} </h2>
-                    <button onclick="deleteMeme(this)" class="del-btn">X</button>`;
-  memesWrap.prepend(newMeme);
+  newMeme.className = "meme-div"
+  newMeme.style.backgroundImage = `url(${imgURL})`;
+  newMeme.style.backgroundSize = "cover";
+  newMeme.innerHTML = `<p class="text" id="top-text"> ${topText} </p>
+                    <p class="text" id="bottom-text"> ${bottomText} </p>
+                    <button onclick="deleteMeme(this)" class="del-btn">Delete</button>`;
+  memesWrapper.prepend(newMeme);
 
   form.reset();
-
 }
 
 function deleteMeme(element){
